@@ -1,6 +1,8 @@
 package io.github.fernando.domain.entities;
 
+import io.github.fernando.domain.enums.EPedidoStatus;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "pedido")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Pedido {
 
     @Id
@@ -25,47 +30,12 @@ public class Pedido {
     @Column(name = "total", length = 20, scale = 2)
     private BigDecimal total;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EPedidoStatus status;
+
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public LocalDate getDataPedido() {
-        return dataPedido;
-    }
-
-    public void setDataPedido(LocalDate dataPedido) {
-        this.dataPedido = dataPedido;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public List<ItemPedido> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<ItemPedido> itens) {
-        this.itens = itens;
-    }
 }

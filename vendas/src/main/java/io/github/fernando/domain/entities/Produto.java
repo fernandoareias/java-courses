@@ -1,38 +1,17 @@
 package io.github.fernando.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 
 @Entity
 @Table(name = "produto")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Produto {
-
-    public Integer getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public BigDecimal getPreco() {
-        return preco;
-    }
-
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
-
 
 
     @jakarta.persistence.Id
