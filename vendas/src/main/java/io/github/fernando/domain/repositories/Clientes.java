@@ -21,24 +21,24 @@ import java.util.List;
 //@Repository
 public interface Clientes extends JpaRepository<Cliente, Integer> {
 
-    List<Cliente> findByNameLike(String nome);
-    List<Cliente> findByNomeLikeOrId(String nome, Integer id);
-    Cliente findOneByNome(String nome);
+    List<Cliente> findByNameLike(String name);
+    List<Cliente> findBynameLikeOrId(String name, Integer id);
+    Cliente findOneByname(String name);
+//
+//    @Query(value = "select c from Cliente where c.name like '%:name%' limit 1", nativeQuery = true)
+//    Cliente encontrarPorname(@Param("name") String name);
+//
+//    @Query("delete from Cliente c where c.name = :name")
+//    @Modifying
+//    void deleteByname(String name);
+//
+//    @Query(" select c from Cliente c left join fetch c.pedidos where c.id = :id")
+//    Cliente findClienteFetchPedidos(@Param("id") Integer id);
 
-    @Query(value = "select c from Cliente where c.nome like '%:nome%' limit 1", nativeQuery = true)
-    Cliente encontrarPorNome(@Param("nome") String nome);
 
-    @Query("delete from Cliente c where c.nome = :nome")
-    @Modifying
-    void deleteByNome(String nome);
-
-    @Query(" select c from Cliente c left join fetch c.pedidos where c.id = :id")
-    Cliente findClienteFetchPedidos(@Param("id") Integer id);
-
-
-////    private static String INSERT = "insert into cliente (nome) values (?)";
+////    private static String INSERT = "insert into cliente (name) values (?)";
 ////    private static String SELECT_ALL = "select * from cliente";
-////    private static String UPDATE = "update cliente set nome = ? where id = ?";
+////    private static String UPDATE = "update cliente set name = ? where id = ?";
 ////    private static String DELETE = "delete from cliente where id = ?";
 //
 ////    @Autowired
@@ -87,17 +87,17 @@ public interface Clientes extends JpaRepository<Cliente, Integer> {
 //    }
 //
 //   @Transactional(readOnly = true)
-//    public List<Cliente> buscarPorNome(String nome)
+//    public List<Cliente> buscarPorname(String name)
 //   {
 //
-//       String sql = "select c from Cliente c where c.nome like :nome";
+//       String sql = "select c from Cliente c where c.name like :name";
 //       var query = _context.createQuery(sql, Cliente.class);
-//       query.setParameter("nome", "%" + nome + "%");
+//       query.setParameter("name", "%" + name + "%");
 //       return query.getResultList();
 //
 ////        return _context.query(
 ////                SELECT_ALL.concat("where name like ?"),
-////                new Object[]{ "%" + nome + "%" }
+////                new Object[]{ "%" + name + "%" }
 ////                ,obterClienteMapper()
 ////        );
 //
@@ -120,7 +120,7 @@ public interface Clientes extends JpaRepository<Cliente, Integer> {
 ////        return new RowMapper<Cliente>() {
 ////            @Override
 ////            public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
-////                return new Cliente(rs.getString("nome"));
+////                return new Cliente(rs.getString("name"));
 ////            }
 ////        };
 
