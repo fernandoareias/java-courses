@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS TB_USERS (
+    username VARCHAR(125) NOT NULL,
+    password VARCHAR(125) NOT NULL
+);
+
