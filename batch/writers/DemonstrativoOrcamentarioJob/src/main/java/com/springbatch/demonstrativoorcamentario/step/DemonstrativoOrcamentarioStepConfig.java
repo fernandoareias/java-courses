@@ -34,7 +34,7 @@ public class DemonstrativoOrcamentarioStepConfig {
 			DemonstrativoOrcamentarioRodape rodapecallback) {
 		return stepBuilderFactory
 				.get("demonstrativoOrcamentarioStep")
-				.<GrupoLancamento,GrupoLancamento>chunk(100)
+				.<GrupoLancamento,GrupoLancamento>chunk(1)
 				.reader(demonstrativoOrcamentarioReader)
 				.writer(demonstrativoOrcamentarioWriter)
 				.listener(rodapecallback)

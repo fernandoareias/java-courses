@@ -8,10 +8,7 @@ import java.util.Date;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileFooterCallback;
-import org.springframework.batch.item.file.FlatFileHeaderCallback;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.MultiResourceItemWriter;
+import org.springframework.batch.item.file.*;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.batch.item.file.builder.MultiResourceItemWriterBuilder;
 import org.springframework.batch.item.file.transform.LineAggregator;
@@ -26,19 +23,32 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class DemonstrativoOrcamentarioWriterConfig {
 
+
 	@StepScope
 	@Bean
 	public MultiResourceItemWriter<GrupoLancamento> multiDemonstrativoOrcamentarioWrite(
-			@Value("classpath:files/clientes.txt") Resource arquivoCliente,
-			FlatFileItemWriter<GrupoLancamento> ddemonstrativoOrcamentarioWriter
-	)
-	{
+			@Value("file:./Users/f.areias/Desktop/java-courses/batch/writers/DemonstrativoOrcamentarioJob/src/main/resources/files/demonstrativoOrcamentario") Resource outputDirectory, // Modificado para apontar para um diretório
+			FlatFileItemWriter<GrupoLancamento> demonstrativoOrcamentarioWriter
+	) {
 		return new MultiResourceItemWriterBuilder<GrupoLancamento>()
 				.name("multiDemonstrativoOrcamentarioWrite")
-				.resource(arquivoCliente)
-				.delegate(ddemonstrativoOrcamentarioWriter)
+				.resource(outputDirectory) // O diretório onde os arquivos serão criados
+				.delegate(demonstrativoOrcamentarioWriter)
+				.resourceSuffixCreator(suffixCreator()) // Para gerar os arquivos com sufixos como 1, 2, 3...
+				.itemCountLimitPerResource(1) // Limite de itens por arquivo
 				.build();
 	}
+
+
+	private ResourceSuffixCreator suffixCreator() {
+		return new ResourceSuffixCreator() {
+			@Override
+			public String getSuffix(int i) {
+				return i + ".txt";
+			}
+		};
+	}
+
 
 	@Bean
 	public FlatFileItemWriter<GrupoLancamento> demonstrativoOrcamentarioWriter(
