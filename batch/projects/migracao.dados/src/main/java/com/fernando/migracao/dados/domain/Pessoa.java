@@ -1,6 +1,7 @@
 package com.fernando.migracao.dados.domain;
 
 import jakarta.persistence.*;
+import org.apache.logging.log4j.util.Strings;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -57,5 +58,9 @@ public class Pessoa implements Serializable {
 
     public void setIdade(Integer idade) {
         this.idade = idade;
+    }
+
+    public boolean isValida() {
+        return !Strings.isBlank(nome) && !Strings.isBlank(email) && dataNascimento != null;
     }
 }

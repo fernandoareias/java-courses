@@ -1,12 +1,13 @@
 package com.fernando.migracao.dados.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "")
+@Table(name = "dados_bancarios")
 public class DadosBancarios {
 
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private int pessoaId;
     private int agencia;
