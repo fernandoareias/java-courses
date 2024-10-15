@@ -4,10 +4,10 @@ import java.util.concurrent.CountDownLatch;
 
 public class InboundOutboundTaskDemo {
     private static final int MAX_PLATFORM = 10;
-    private static final int MAX_VIRTUAL = 10;
+    private static final int MAX_VIRTUAL = 50_000;
 
     public static void main(String[] args) throws InterruptedException {
-        virtualThreadDemo4();
+        virtualThreadDemo();
     }
     // To create platform thread
     private static void platformThreadDemo1(){
@@ -49,13 +49,18 @@ public class InboundOutboundTaskDemo {
 
     // To create virtual thread
     // virtual thread are demon threads by default
-    private static void virtualThreadDemo4(){
-        var builder = Thread.ofVirtual();
+    private static void virtualThreadDemo() throws InterruptedException {
+        var latch = new CountDownLatch(MAX_VIRTUAL);
+        var builder = Thread.ofVirtual().name("virtual-", 1);
         for(int i = 0; i < MAX_VIRTUAL; i++)
         {
             int j = i;
-            Thread thread = builder.unstarted(() -> Task.ioIntensive(j));
+            Thread thread = builder.unstarted(() -> {
+                Task.ioIntensive(j);
+                latch.countDown();
+            });
             thread.start();
         }
+        latch.await();
     }
 }
