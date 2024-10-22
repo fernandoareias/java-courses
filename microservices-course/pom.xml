@@ -16,6 +16,7 @@
 		<module>cambio-service</module>
 		<module>book-service</module>
 		<module>naming-service</module>
+		<module>gateway-service</module>
 	</modules>
 
 </project>

@@ -30,3 +30,22 @@ spring:
 server:
   port: 8100
 
+resilience4j:
+  ratelimiter:
+    instancer:
+      default:
+        limit-for-period: 2
+  retry:
+    instances:
+      foo-bar:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true
+      default:
+        max-attempts: 3
+
+
+springdoc:
+  show-actuator: true
+  api-docs:
+    path: book-service/v3/api-docs

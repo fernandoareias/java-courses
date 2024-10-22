@@ -11,6 +11,7 @@
         <module name="greeting-service" />
         <module name="naming-service" />
         <module name="book-service" />
+        <module name="gateway-service" />
         <module name="cambio-service" />
       </profile>
     </annotationProcessing>
@@ -24,6 +25,7 @@
       <module name="book-service" options="-parameters" />
       <module name="cambio-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="greeting-service" options="-parameters" />
       <module name="greeting-service (1)" options="-parameters" />
       <module name="greeting-service (2)" options="-parameters" />
