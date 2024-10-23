@@ -49,3 +49,10 @@ springdoc:
   show-actuator: true
   api-docs:
     path: book-service/v3/api-docs
+
+
+logging:
+  file:
+    name: application.log
+  level:
+    root: INFO

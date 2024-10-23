@@ -1,0 +1,40 @@
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/application.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DATADOG" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>127.0.0.1:10518</destination>
+        <keepAliveDuration>5 minute</keepAliveDuration>
+        <includeCallerData>true</includeCallerData>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeCallerData>true</includeCallerData>
+            <includeTags>true</includeTags>
+            <customFields>{"ddtags": "source:java"}</customFields>
+
+            <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>ddf281a47ce19549d9f78ccbee5564f9 %mdc{weJustNeedSthEmptyHereSoTheXMLParserWillKeepAWhitespace}</pattern>
+                </layout>
+            </prefix>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="DATADOG" />
+    </root>
+
+</configuration>
